@@ -3,7 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 
 
 
@@ -18,8 +18,8 @@ export default function Card({ item }) {
         }
         else {
             let checkProd = cart?.filter(prod => prod?.id === item?.id)
-            if (checkProd) {
-                return toast.error(`${item.product_name} already to cart !`)
+            if (checkProd.length > 0) {
+                return toast.error(`${item.product_name} already in cart !`)
             }
             else {
                 dispatch(setCart(item))
