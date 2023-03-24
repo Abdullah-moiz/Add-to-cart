@@ -8,11 +8,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { AiFillDelete } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux';
-import { setCart } from '@/slices/cartSlice';
+import { setCart, setDeleteCart } from '@/slices/cartSlice';
 
 
 export default function Landing() {
-    const dispatch =  useDispatch();
+    const dispatch = useDispatch();
     const router = useRouter();
     const [product, setProduct] = useState([]);
     const [qnt, setQnt] = useState(1)
@@ -46,7 +46,7 @@ export default function Landing() {
 
     const handleDelete = (id) => {
         const newCart = cart?.filter(item => item?.id !== id)
-        dispatch(setCart([...newCart]))
+        dispatch(setDeleteCart(newCart))
     }
 
 
@@ -54,7 +54,8 @@ export default function Landing() {
     return (
         <div className='w-full px-2 py-2 flex flex-col items-center'>
             <h1 className='text-lg font-extrabold py-2 mb-2 border-b border-indigo-600'>Shopping Cart</h1>
-            <Link href="#cart"><BsCart className="fixed md:text-6xl mx-4 top-0 right-0 text-2xl" /></Link>
+            <Link href="#cart" className='relative'><BsCart className="fixed md:text-6xl mx-4 top-2 right-0 text-2xl" /></Link>
+            <p className='absolute z-10 top-0 right-3 text-red-600 text-xl font-semibold'>{cart.length}</p>
             <div className='border w-full h-full flex md:flex-row flex-col '>
                 <div className=':w-8/12 w-full py-4 flex flex-wrap'>
                     {
