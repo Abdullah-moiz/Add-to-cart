@@ -12,12 +12,19 @@ export default function Card({ item }) {
     const cart = useSelector(state => state.cart.cart)
 
     const AddToCart = () => {
-        if (item?.id in cart ) {
-            return toast.error("Product Is Already In Cart")
+        if (cart.length === 0) {
+            dispatch(setCart(item))
+            toast.success(`${item.product_name} added to cart !`)
         }
         else {
-            toast.success("Product Added to Cart")
-            return dispatch(setCart(item))
+            let checkProd = cart?.filter(prod => prod?.id === item?.id)
+            if (checkProd) {
+                return toast.error(`${item.product_name} already to cart !`)
+            }
+            else {
+                dispatch(setCart(item))
+                toast.success(`${item.product_name} added to cart !`)
+            }
         }
     }
 
