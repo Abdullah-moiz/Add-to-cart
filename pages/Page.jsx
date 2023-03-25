@@ -55,11 +55,13 @@ export default function Landing() {
     const handleDecrement = (id) => {
         const updatedCartItems = cart?.map(prod => {
             if (prod.id === id) {
-                let newQuantity =  prod?.product_quantity -  1
-                return {
-                    ...prod,
-                    product_quantity: newQuantity ,
-                };
+                if(prod?.product_quantity > 1){
+                    let newQuantity =  prod?.product_quantity -  1
+                    return {
+                        ...prod,
+                        product_quantity: newQuantity ,
+                    };
+                } 
             }
             return prod;
         });
